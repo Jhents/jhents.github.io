@@ -1,4 +1,4 @@
-JordanandMaryBuckley.com
+JhentsAndDanica.com
 ========================
 
 This is a website I built for my wedding reception in May 2014. It's a one-page responsive scrolling site designed around big, beautiful images.
