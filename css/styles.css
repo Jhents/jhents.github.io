@@ -205,6 +205,8 @@ hr {border-color: #ddd;}
   border-radius: 5px; 
   object-fit: cover;
   max-height: 660px;
+  height: 100%;
+  aspect-ratio: 2/3;
 }
 
 .centered-btns_nav {
