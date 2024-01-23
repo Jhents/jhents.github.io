@@ -47,7 +47,7 @@
 	<div class="container">
 		<div class="headline">
 			<h1 class="w3-animate-opacity w3-animate-bottom">Jhents & Danica</h1>
-			<p class="lead w3-animate-opacity w3-animate-bottom"">November 12, 2023<br />Aquila Crystal Palace</p>
+			<p class="lead w3-animate-opacity w3-animate-bottom">November 12, 2023<br />Aquila Crystal Palace</p>
 		</div>
 		<div class="introbuttons">
 			<p>
@@ -101,7 +101,7 @@
 
 		<!-- photo gallery using ResponsiveSlides.js -->
 		<div class="rslides_container">
-			<ul class="rslides">
+			<ul class="rslides" id="imageList">
 				<li><img src="JhentsPic/IMG_1387.JPG" alt=""></li>
 				<li><img src="JhentsPic/IMG_1993.JPG" alt=""></li>
 				<li><img src="JhentsPic/IMG_1679.JPG" alt=""></li>
@@ -193,6 +193,12 @@
 		<p>This website was created by <a href="https://instagram.com/jhentstamayo" target="_blank">Jhents Tamayo</a></p>
 	</div>
 
+	<!-- <div class="page-section"><H1>Image List </H1></div>
+	 -->
+	<!-- <ul id="imageList">
+		<li>TEST</li>
+	</ul>  -->
+
 </div>
 <!--/#registry-->
 
@@ -236,6 +242,46 @@ if (typeof console === "undefined") {
         log: function() { }
     };
 }
+var folderPath = 'JhentsPic';
+var imageList = document.getElementById('imageList');
+
+// Fetch the content of the folder
+fetch(folderPath)
+  .then(function (response) {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    // Check the content type of the response
+    var contentType = response.headers.get('Content-Type');
+
+    if (contentType && contentType.includes('application/json')) {
+      // If the response is JSON, parse it
+      return response.json();
+    } else {
+      // If the response is not JSON, handle it accordingly (e.g., as text or blob)
+      return response.text(); // or response.blob() for binary data
+    }
+  })
+  .then(function (data) {
+    // Process the data based on its type
+    if (Array.isArray(data)) {
+      // Assuming it's an array of file names
+      for (var i = 0; i < data.length; i++) {
+        var listItem = document.createElement('li');
+        var image = document.createElement('img');
+        image.src = folderPath + '/' + data[i];
+        listItem.appendChild(image);
+        imageList.appendChild(listItem);
+      }
+    } else {
+      // Handle non-JSON response (e.g., plain text)
+      console.log('Non-JSON response:', data);
+    }
+  })
+  .catch(function (error) {
+    console.error('Error fetching data:', error);
+  });
 </script>
 
 <!--ResponsiveSlides.js code-->
@@ -260,8 +306,13 @@ if (typeof console === "undefined") {
 		before: function(){},   // Function: Before callback
 		after: function(){}     // Function: After callback
 	});
-  });
+  }); 	
+
+
+  // Set the path to the folder containing the pictures
+  
 </script>
+
 
 </body>
 </html>
